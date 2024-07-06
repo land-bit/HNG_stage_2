@@ -1,8 +1,9 @@
 {
   "name": "hng_stage_2",
   "version": "1.0.0",
-  "description": "cette application est créée pour un but de la formation de HNG",
+  "description": "This app is created for HNG training purpose",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
