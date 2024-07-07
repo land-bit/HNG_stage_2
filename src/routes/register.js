@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { registerUser } from "../middlewares/expressvalidator";
-import { createUser } from "../controllers/post";
+import { registerUser } from "../middlewares/expressvalidator.js";
+import { createUser } from "../controllers/post.js";
 
 const register = Router();
 

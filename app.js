@@ -1,5 +1,5 @@
 import express from "express";
-import register from "./src/routes/register";
+import register from "./src/routes/register.js";
 
 const app = express();
 
