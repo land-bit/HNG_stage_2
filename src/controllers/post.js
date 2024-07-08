@@ -156,6 +156,7 @@ export const createOrganisation = async (req, res) => {
         },
       },
       select: {
+        orgId: true,
         name: true,
         description: true,
       },
@@ -165,6 +166,49 @@ export const createOrganisation = async (req, res) => {
       status: "success",
       message: "Organisation created successfully",
       data: newOrganisation,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({
+      status: "Bad Request",
+      message: "Client error",
+      statusCode: 400,
+    });
+  }
+};
+
+export const addUser = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({
+      errors: errors.array().map((err) => ({
+        field: err.param,
+        message: err.msg,
+      })),
+    });
+  }
+
+  const { userId } = req.body;
+  const { orgId } = req.params;
+  try {
+    const organisationVerify = await prisma.organization.findUnique({
+      where: { orgId },
+    });
+    if (!organisationVerify)
+      return res.status(400).json({ message: "Organisation not found" });
+    await prisma.organization.update({
+      where: { orgId },
+      data: {
+        users: {
+          connect: {
+            userId,
+          },
+        },
+      },
+    });
+    return res.status(200).json({
+      status: "success",
+      message: "User added to organisation successfully",
     });
   } catch (error) {
     console.error(error);

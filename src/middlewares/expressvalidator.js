@@ -89,3 +89,13 @@ export const verifyOrganisation = [
     .isString()
     .withMessage("description must be a string"),
 ];
+
+export const verifyUser = [
+  body("userId")
+    .notEmpty()
+    .withMessage("userId is required")
+    .escape()
+    .withMessage("userId must not contain HTML")
+    .isString()
+    .withMessage("userId must be a string"),
+];
