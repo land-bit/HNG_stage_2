@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { getUser } from "../controllers/get.js";
-import { deleteUser } from "../controllers/delete.js";
+import { getOneUsers, getUsers } from "../controllers/get.js";
+import { token } from "../middlewares/token.js";
 
-const user = Router();
+const users = Router();
 
-user.get("/", getUser);
-user.delete("/", deleteUser);
+users.get("/", getUsers);
 
-export default user;
+users.get("/:id", token, getOneUsers);
+
+export default users;

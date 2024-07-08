@@ -1,7 +1,7 @@
 import express from "express";
 import register from "./src/routes/register.js";
 import login from "./src/routes/login.js";
-import user from "./src/routes/users.js";
+import users from "./src/routes/users.js";
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use("/auth/login", login);
 
 app.use("/auth/register", register);
 
-app.use("/user", user);
+app.use("/api/users", users);
 
 app.get("/", (req, res) => {
   res.send(`Welcome to this API!`);
