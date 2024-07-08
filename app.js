@@ -6,7 +6,7 @@ import organisations from "./src/routes/organisation.js";
 
 const app = express();
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 
 app.use(express.json());
 

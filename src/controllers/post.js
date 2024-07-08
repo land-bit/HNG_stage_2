@@ -131,3 +131,47 @@ export const loginController = async (req, res) => {
     });
   }
 };
+
+export const createOrganisation = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({
+      errors: errors.array().map((err) => ({
+        field: err.param,
+        message: err.msg,
+      })),
+    });
+  }
+
+  const { name, description } = req.body;
+  try {
+    const newOrganisation = await prisma.organization.create({
+      data: {
+        name,
+        description,
+        users: {
+          connect: {
+            userId: req.userId,
+          },
+        },
+      },
+      select: {
+        name: true,
+        description: true,
+      },
+    });
+
+    return res.status(201).json({
+      status: "success",
+      message: "Organisation created successfully",
+      data: newOrganisation,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).json({
+      status: "Bad Request",
+      message: "Client error",
+      statusCode: 400,
+    });
+  }
+};

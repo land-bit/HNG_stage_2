@@ -42,13 +42,7 @@ export const registerUser = [
     .isString()
     .withMessage("password must be a string"),
 
-  body("phone")
-    .notEmpty()
-    .withMessage("phone is required")
-    .escape()
-    .withMessage("phone must not contain HTML")
-    .isString()
-    .withMessage("phone must be a string"),
+  body("phone").optional().isString().withMessage("phone must be a string"),
 ];
 
 // {
@@ -74,4 +68,24 @@ export const loginUser = [
     .withMessage("password must be at least 8 characters long")
     .isString()
     .withMessage("password must be a string"),
+];
+
+// {
+// 	"name": "string", // Required and cannot be null
+// 	"description": "string",
+// }
+
+export const verifyOrganisation = [
+  body("name")
+    .notEmpty()
+    .withMessage("name is required")
+    .escape()
+    .withMessage("name must not contain HTML")
+    .isString()
+    .withMessage("name must be a string"),
+
+  body("description")
+    .optional()
+    .isString()
+    .withMessage("description must be a string"),
 ];
