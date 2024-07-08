@@ -68,35 +68,51 @@ export const getOneUsers = async (req, res) => {
 
 export const getOrganizations = async (req, res) => {
   try {
-    if (req.userId !== id)
-      return res.status(403).json({ message: "Unauthorized" });
+    const id = req.userId;
 
-    const userId = await prisma.user.findFirst({
+    const userId = await prisma.user.findUnique({
       where: { userId: id },
-      select: {
-        userId: true,
-        firstName: true,
-        lastName: true,
-        email: true,
-        phone: true,
-      },
+      include: { organisation: true },
     });
-    if (!userId)
-      return res.status(400).json({
-        status: "Bad Request",
-        message: "User not found",
-      });
     return res.status(200).json({
       status: "success",
       message: "<message>",
-      data: userId,
+      data: { organisations: userId.organisation },
     });
   } catch (error) {
     console.error(error);
-    return res.status(401).json({
+    return res.status(500).json({
       status: "Bad request",
-      message: "Authentication failed",
-      statusCode: 401,
+      message: "Request failed",
+      statusCode: 500,
+    });
+  }
+};
+
+export const getOneOrganisation = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const organisation = await prisma.organization.findUnique({
+      where: { orgId: id },
+    });
+
+    if (!organisation)
+      return res.status(400).json({
+        status: "Bad Request",
+        message: "Organisation not found",
+      });
+
+    return res.status(200).json({
+      status: "success",
+      message: "<message>",
+      data: organisation,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: "Bad request",
+      message: "Request failed",
+      statusCode: 500,
     });
   }
 };
