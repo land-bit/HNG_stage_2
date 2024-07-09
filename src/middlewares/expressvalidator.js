@@ -10,33 +10,29 @@ import { body } from "express-validator";
 export const registerUser = [
   body("firstName")
     .notEmpty()
-    .withMessage("firstName is required")
     .escape()
-    .withMessage("firstName must not contain HTML")
+    .withMessage("firstName is required")
     .isString()
     .withMessage("firstName must be a string"),
 
   body("lastName")
     .notEmpty()
-    .withMessage("lastName is required")
     .escape()
-    .withMessage("lastName must not contain HTML")
+    .withMessage("lastName is required")
     .isString()
     .withMessage("lastName must be a string"),
 
   body("email")
     .notEmpty()
-    .withMessage("email is required")
     .escape()
-    .withMessage("email must not contain HTML")
+    .withMessage("email is required")
     .isEmail()
     .withMessage("email must be an email address"),
 
   body("password")
     .notEmpty()
-    .withMessage("password is required")
     .escape()
-    .withMessage("password must not contain HTML")
+    .withMessage("password is required")
     .isLength({ min: 8 })
     .withMessage("password must be at least 8 characters long")
     .isString()
@@ -53,17 +49,15 @@ export const registerUser = [
 export const loginUser = [
   body("email")
     .notEmpty()
-    .withMessage("email is required")
     .escape()
-    .withMessage("email must not contain HTML")
+    .withMessage("email is required")
     .isEmail()
     .withMessage("email must be an email address"),
 
   body("password")
     .notEmpty()
-    .withMessage("password is required")
     .escape()
-    .withMessage("password must not contain HTML")
+    .withMessage("password is required")
     .isLength({ min: 8 })
     .withMessage("password must be at least 8 characters long")
     .isString()
@@ -78,9 +72,8 @@ export const loginUser = [
 export const verifyOrganisation = [
   body("name")
     .notEmpty()
-    .withMessage("name is required")
     .escape()
-    .withMessage("name must not contain HTML")
+    .withMessage("name is required")
     .isString()
     .withMessage("name must be a string"),
 
@@ -93,9 +86,8 @@ export const verifyOrganisation = [
 export const verifyUser = [
   body("userId")
     .notEmpty()
-    .withMessage("userId is required")
     .escape()
-    .withMessage("userId must not contain HTML")
+    .withMessage("userId is required")
     .isString()
     .withMessage("userId must be a string"),
 ];

@@ -6,8 +6,6 @@ import organisations from "./src/routes/organisation.js";
 
 const app = express();
 
-const port = process.env.PORT || 3002;
-
 app.use(express.json());
 
 app.use("/api/organisations", organisations);
@@ -22,4 +20,4 @@ app.get("/", (req, res) => {
   res.send(`Welcome to this API!`);
 });
 
-app.listen(port, () => console.log("listening on port : " + port));
+export default app;

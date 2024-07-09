@@ -39,7 +39,7 @@ export const createUser = async (req, res) => {
         phone,
         organisation: {
           create: {
-            name: `${firstName}'s organization`,
+            name: `${firstName}'s organisation`,
           },
         },
       },
