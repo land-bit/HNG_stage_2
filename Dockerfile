@@ -8,6 +8,7 @@ WORKDIR /home/landbit/Projects/HNG_State_2/
 COPY . .
 
 # Installer les dépendances avec pnpm
+RUN rm -rf node_modules
 RUN npm install -g pnpm
 RUN pnpm install
 
